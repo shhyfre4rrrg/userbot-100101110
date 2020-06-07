@@ -39,10 +39,6 @@ async def updater(upd):
 
     try:
         repo = git.Repo()
-    except NoSuchPathError as error:
-        await upd.edit(f'**directory {error} inesistente**')
-        repo.__del__()
-        return
     except git.exc.InvalidGitRepositoryError as error:
         await upd.edit(
             f'**La directory, {error} non è un repository git.**'
