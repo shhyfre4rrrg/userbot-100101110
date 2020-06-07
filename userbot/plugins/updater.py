@@ -20,6 +20,7 @@ from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 from userbot import bot, ALIVE_NAME, UPSTREAM_REPO_URL
 from userbot.system import dev_cmd
+from var import Var
 
 # -- Constants -- #
 UPSTREAM_REPO_URL = "https://github.com/100101110/userbot-100101110.git"
@@ -32,21 +33,17 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "100101110"
 @bot.on(dev_cmd("update ?(.*)", outgoing=True))
 async def updater(upd):
     "For .update command, check if the bot is up to date, update if specified"
-    await upd.edit('**Ricerca update, in corso....**')
+    await upd.edit('**Ricerca update in corso....**')
 
     try:
         repo = git.Repo()
-    except git.exc.InvalidGitRepositoryError as error:
-        await upd.edit(
-            f'**La directory, {error} non è un repository git.**'
-        )
-        return
-    repo = git.Repo.init()
-    origin = repo.create_remote('updater', UPSTREAM_REPO_URL)
-    origin.fetch()
-    repo.create_head('master', origin.refs.master)
-    repo.heads.master.set_tracking_branch(origin.refs.master)
-    repo.heads.master.checkout(True)
+    except git.exc.InvalidGitRepositoryError as e:
+        repo = git.Repo.init()
+        origin = repo.create_remote('updater', UPSTREAM_REPO_URL)
+        origin.fetch()
+        repo.create_head('master', origin.refs.master)
+        repo.heads.master.set_tracking_branch(origin.refs.master)
+        repo.heads.master.checkout(True)
 
     active_branch_name = repo.active_branch.name
     if active_branch_name != 'master':
@@ -60,7 +57,8 @@ async def updater(upd):
 
     try:
         repo.create_remote('updater', UPSTREAM_REPO_URL)
-    except BaseException:
+    except BaseException as e:
+        print(e)
         pass
 
     upd_rem = repo.remote('updater')
