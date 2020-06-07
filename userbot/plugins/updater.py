@@ -8,8 +8,7 @@ import re
 import time
 import sys
 import os
-from os import remove
-from os import execl
+from os import remove, execl
 from datetime import datetime
 from collections import deque
 from contextlib import suppress
@@ -18,11 +17,9 @@ from telethon.tl.types import MessageEntityMentionName
 from telethon import events
 import git
 from git import Repo
-from git.exc import GitCommandError
-from git.exc import InvalidGitRepositoryError
-from git.exc import NoSuchPathError
+from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 from userbot import bot, ALIVE_NAME, UPSTREAM_REPO_URL
-from userbot.system import register
+from userbot.system import dev_cmd
 
 # -- Constants -- #
 UPSTREAM_REPO_URL = "https://github.com/100101110/userbot-100101110.git"
@@ -32,7 +29,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "100101110"
 # -- Constants End -- #
 
 
-@register(outgoing=True, pattern=r"^.update(?: |$)")
+@bot.on(dev_cmd("update ?(.*)", outgoing=True))
 async def updater(upd):
     "For .update command, check if the bot is up to date, update if specified"
     await upd.edit('**Ricerca update, in corso....**')
@@ -44,19 +41,19 @@ async def updater(upd):
             f'**La directory, {error} non è un repository git.**'
         )
         return
-        repo = git.Repo.init()
-        origin = repo.create_remote('updater', UPSTREAM_REPO_URL)
-        origin.fetch()
-        repo.create_head('master', origin.refs.master)
-        repo.heads.master.set_tracking_branch(origin.refs.master)
-        repo.heads.master.checkout(True)
+    repo = git.Repo.init()
+    origin = repo.create_remote('updater', UPSTREAM_REPO_URL)
+    origin.fetch()
+    repo.create_head('master', origin.refs.master)
+    repo.heads.master.set_tracking_branch(origin.refs.master)
+    repo.heads.master.checkout(True)
 
     active_branch_name = repo.active_branch.name
     if active_branch_name != 'master':
         await upd.edit(
-            f'**[UPDATER]: Sembra che stai utilizzando un ramo custom** {active_branch_name}.\n'
-            '**in tal caso, Updater è in grado di identificare**\n'
-            '**quale ramo deve essere unito.**\n'
+            f'**[UPDATER]: Sembra che stai utilizzando un ramo custom** {active_branch_name}.'
+            '**in tal caso, Updater è in grado di identificare**'
+            '**quale ramo deve essere unito.**'
             '**Per favore checkout a qualsiasi branch ufficiale**')
         repo.__del__()
         return
@@ -85,7 +82,7 @@ async def updater(upd):
         file = open("change.txt", "w+")
         file.write(changelog_str)
         file.close()
-        await tgbot.client.send_file(
+        await bot.client.send_file(
             upd.chat_id,
             "change.txt",
             reply_to=upd.id,
@@ -119,7 +116,7 @@ async def updater(upd):
                     remote.set_url(heroku_git_url)
                 else:
                     remote = repo.create_remote("heroku", heroku_git_url)
-                asyncio.get_event_loop().create_task(deploy_start(tgbot, upd, HEROKU_GIT_REF_SPEC, remote))
+                asyncio.get_event_loop().create_task(deploy_start(bot, upd, HEROKU_GIT_REF_SPEC, remote))
 
             else:
                 await upd.edit('**Crea la Var `HEROKU_APP_NAME` e inserisci il nome del bot in heroku come value.**')
@@ -137,8 +134,8 @@ async def gen_chlog(repo, diff_marker):
         ch_log += f'•[{c.committed_datetime.strftime(d_form)}]: {c.summary} <{c.author}>\n'
     return ch_log
 
-async def deploy_start(tgbot, upd, refspec, remote):
+async def deploy_start(bot, upd, refspec, remote):
     await upd.edit('**Update in corso...\nAttendi 5 minuti e premi `.alive`**')
     await remote.push(refspec=refspec)
-    await tgbot.disconnect()
+    await bot.disconnect()
     os.execl(sys.executable, sys.executable, *sys.argv)
