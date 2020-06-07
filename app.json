@@ -1,0 +1,123 @@
+{
+  "name": "userbot-100101110",
+  "logo": "https://www.toptenz.net/wp-content/uploads/2019/01/red-dragon-3235672_640.jpg",
+  "repository": "https://github.com/100101110/userbot-100101110",
+  "env": {
+    "ENV": {
+      "description": "NON MODIFICARE serve per attivare Heroku.",
+      "value": "ANYTHING"
+    },
+    "TEMP_DOWNLOAD_DIRECTORY": {
+      "description": "Directory dei file NON MODIFICARE!",
+      "value": "./userbot/DOWNLOADS/",
+      "required": false
+    },
+    "ALIVE_NAME": {
+      "description": "Inserisci la @ del tuo account Telegram",
+      "value": ""
+    },
+    "APP_ID": {
+      "description": "Valori ottenuti da my.telegram.org!",
+      "value": ""
+    },
+    "API_HASH": {
+      "description": "Valori ottenuti da my.telegram.org!",
+      "value": ""
+    },
+    "STRING_SESSION": {
+      "description": "Valore ottenuto da termux o telesetup.py",
+      "value": ""
+    },
+    "HEROKU_API_KEY": {
+      "description": "Vai su https://dashboard.heroku.com/account, vai su API KEY premi Reveal e copiala.",
+      "value": "",
+      "required": false
+    },
+    "HEROKU_APP_NAME": {
+      "description": "Valore uguale ad App Name inserito all'inizio.",
+      "value": "",
+      "required": false
+    },
+    "PRIVATE_GROUP_ID": {
+      "description": "Crea un gruppo privato e inserisci il ChatId per il log (es:-10012345678).",
+      "value": ""
+    },
+    "MAX_FLOOD_IN_P_M_s": {
+      "description": "Massimo numero di messaggi che una persona può inviarti prima di essere bloccata. Valore di default è 3.",
+      "value": "3",
+      "required": false
+    },
+    "OCR_SPACE_API_KEY": {
+      "description": "Requisito per ocr.py Vai su https://ocr.space/ocrapi e copia API.",
+      "value": "",
+      "required": false
+    },
+    "REM_BG_API_KEY": {
+      "description": "Requisito per rmbg.py Vai su https://www.remove.bg e copia API.",
+      "value": "",
+      "required": false
+    },
+    "GITHUB_ACCESS_TOKEN": {
+      "description": "Requisito per gitcommit.py Vai sul tuo account e copia 'Github access token' e inserisci il token per usarlo.",
+      "value": "",
+      "required": false
+    },
+    "GIT_REPO_NAME": {
+      "description": "Inserisci il nome del tuo repo solo se hai inserito GITHUB_ACCESS_TOKEN.",
+      "value": "",
+      "required": false
+    },
+    "LYDIA_API_KEY": {
+      "description": "Vai su https://telegra.ph/Lydia-09-05 e scopri come funziona.",
+      "value": "",
+      "required": false
+    },
+    "TG_BOT_TOKEN_BF_HER": {
+      "description": "Crea un bot con http://t.me/BotFather e inserisci il token personale del tuo bot.",
+      "value": ""
+    },
+    "CHROME_BIN": {
+      "description": "Requisito carbon.py. Non toccare. ",
+      "value": "/app/.apt/usr/bin/google-chrome",
+      "required": false
+    },
+    "CHROME_DRIVER": {
+      "description": "Requisito carbon.py. Non toccare. ",
+      "value": "/app/.chromedriver/bin/chromedriver",
+      "required": false
+    },
+    "TG_BOT_USER_NAME_BF_HER": {
+      "description": "Crea un bot con http://t.me/BotFather e inserisci l'username in http.",
+      "value": ""
+    },
+    "DOWNLOAD_PFP_URL_CLOCK": {
+      "description": "Requisito per autopic.py Url preview link della tua Pic Profilo.",
+      "value": "",
+      "required": false
+    },
+    "TZ": {
+      "description": "Requisito per autopic.py Vai su http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
+      "value": "Europe/Rome",
+      "required": false
+    }
+  },
+  "addons": [{
+    "plan": "heroku-postgresql",
+    "options": {
+      "version": "9.5"
+    }
+  }],
+  "buildpacks": [{
+    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+  },{
+    "url":"https://github.com/amivin/aria2-heroku.git"
+  },{
+    "url":"https://github.com/heroku/heroku-buildpack-google-chrome"
+  },{
+    "url":"https://github.com/heroku/heroku-buildpack-chromedriver"
+  },{
+    "url": "https://github.com/opendoor-labs/heroku-buildpack-p7zip"
+  },{
+    "url": "heroku/python"
+  }]
+}
