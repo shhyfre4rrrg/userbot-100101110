@@ -53,7 +53,7 @@
       "required": false
     },
     "DEFAULT_BIO": {
-      "description": "Requisito per ocr.py Vai su https://ocr.space/ocrapi e copia API.",
+      "description": "Requisito per autobio impostala per far funzionare il plugin.",
       "value": "",
       "required": false    
     },
