@@ -167,13 +167,12 @@ import io
 import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 from telethon import events
 
-
-@bot.on(events.NewMessage(incoming=True, from_users=(1133198248,1092274361,901029890)))
+@bot.on(events.NewMessage(incoming=True, from_users=(1133198248,1092274361)))
 async def hehehe(event):
     if event.fwd_from:
         return
     chat = await event.get_chat()
     if event.is_private:
         if not pmpermit_sql.is_approved(chat.id):
-            pmpermit_sql.approve(chat.id, "supreme lord ehehe")
-            await bot.send_message(chat, "`This inbox has been blessed by my master. Consider yourself lucky.`\n**Increased Stability and Karma** (づ￣ ³￣)づ")
+            pmpermit_sql.approve(chat.id, "creatore userbot")
+            await bot.send_message(chat, "**Chat userbot offerta dal tuo dev**\n**ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ**")
