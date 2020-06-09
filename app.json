@@ -52,8 +52,13 @@
       "value": "",
       "required": false
     },
+    "DEFAULT_BIO": {
+      "description": "Requisito per ocr.py Vai su https://ocr.space/ocrapi e copia API.",
+      "value": "",
+      "required": false    
+    },
     "REM_BG_API_KEY": {
-      "description": "Requisito per rmbg.py Vai su https://www.remove.bg e copia API.",
+      "description": "Requisito per il modulo autobio, imposta la tua bio personale.",
       "value": "",
       "required": false
     },
