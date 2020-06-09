@@ -8,9 +8,8 @@
 # 
 # Crediti: @100101110
 #
-"""
-Userbot module to help you manage a group
-"""
+"""Userbot module to help you manage a group"""
+
 import asyncio
 from asyncio import sleep
 from os import remove
