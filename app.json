@@ -16,6 +16,11 @@
       "description": "Inserisci la @ del tuo account Telegram",
       "value": ""
     },
+    "AUTONAME": {
+      "description": "Requisito per il modulo autoprofilo.py imposta un nome che apparirà come nome di telegram.",
+      "value": "",
+      "required": false
+    },
     "APP_ID": {
       "description": "Valori ottenuti da my.telegram.org!",
       "value": ""
@@ -53,7 +58,7 @@
       "required": false
     },
     "DEFAULT_BIO": {
-      "description": "Requisito per autobio impostala per far funzionare il plugin.",
+      "description": "Requisito per autoprofilo.py impostala per far funzionare il plugin.",
       "value": "",
       "required": false    
     },
