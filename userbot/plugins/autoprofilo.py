@@ -16,13 +16,13 @@ from pySmartDL import SmartDL
 from telethon import events
 from telethon.tl import functions
 from telethon.errors import FloodWaitError
-from userbot import bot, ALIVE_NAME, DEFAULT_BIO, CMD_HELP
+from userbot import bot, AUTONAME, DEFAULT_BIO, CMD_HELP
 from userbot.system import dev_cmd, command
 
 # ================= CONSTANT =================
 DEFAULTUSERBIO = str(DEFAULT_BIO) if DEFAULT_BIO else "ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ"
 DEL_TIME_OUT = 30
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "100101110" 
+DEFAULTUSER = str(AUTONAME) if AUTONAME else "100101110" 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 # ============================================
 
@@ -73,11 +73,6 @@ async def _(event):
         except FloodWaitError as ex:
             logger.warning(str(e))
             await asyncio.sleep(ex.seconds)
-    
-        if Var.PRIVATE_GROUP_ID:
-            await bot.send_message(
-                Var.PRIVATE_GROUP_ID, "#AUTONAME\n"
-                "Nome profilo aggiornato.")
 
         await asyncio.sleep(DEL_TIME_OUT)
     
@@ -97,11 +92,6 @@ async def _(event):
         except FloodWaitError as ex:
             logger.warning(str(e))
             await asyncio.sleep(ex.seconds)
-
-        if Var.PRIVATE_GROUP_ID:
-            await bot.send_message(
-                Var.PRIVATE_GROUP_ID, "#AUTOBIO\n"
-                "Bio profilo aggiornata.")
 
         await asyncio.sleep(DEL_TIME_OUT)
      
@@ -166,10 +156,5 @@ async def _(event):
         except FloodWaitError as ex:
             logger.warning(str(e))
             await asyncio.sleep(ex.seconds)
-
-        if Var.PRIVATE_GROUP_ID:
-            await bot.send_message(
-                Var.PRIVATE_GROUP_ID, "#MONKEYBIO\n"
-                "MonkeyBio attivata.")
 
         await asyncio.sleep(DEL_TIME_OUT)
