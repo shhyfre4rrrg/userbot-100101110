@@ -1,7 +1,7 @@
 from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 import asyncio
 from userbot.system import command
-from userbot import BOTLOG, BOTLOG_CHATID, ALIVE_NAME
+from userbot import ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "100101110"
 
@@ -33,12 +33,7 @@ async def startgmute(event):
     except Exception as e:
         await event.edit("Error occured!\nError is " + str(e))
     else:
-        await event.edit(f"`{DEFAULTUSER}:`**Ok bro gmute eseguito.**")
-    if BOTLOG:
-        await event.client.send_message(
-            BOTLOG_CHATID, "#GMUTE\n"
-            f"USER: [{userid.first_name}](tg://user?id={user.id})\n"
-            f"CHAT: {event.chat.title}(`{event.chat_id}`)")
+        await event.edit(f"`{DEFAULTUSER}:`**bro gmute eseguito.**")
 
 
 @command(outgoing=True, pattern=r"^.ungmute ?(\d+)?")
@@ -67,13 +62,7 @@ async def endgmute(event):
     except Exception as e:
         await event.edit("Error occured!\nError is " + str(e))
     else:
-        await event.edit(f"`{DEFAULTUSER}:`**Ok bro ungmute eseguito.**")
-    if BOTLOG:
-        await event.client.send_message(
-            BOTLOG_CHATID, "#UNGMUTE\n"
-            f"USER: [{userid.first_name}](tg://user?id={user.id})\n"
-            f"CHAT: {event.chat.title}(`{event.chat_id}`)")
-
+        await event.edit(f"`{DEFAULTUSER}:`**bro ungmute eseguito.**")
 
 @command(incoming=True)
 async def watcher(event):
