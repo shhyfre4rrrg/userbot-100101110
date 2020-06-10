@@ -42,7 +42,6 @@ async def install(event):
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
 
-
 @command(pattern="^.send (?P<shortname>\w+)$", outgoing=True)
 async def send(event):
     if event.fwd_from:
@@ -64,7 +63,6 @@ async def send(event):
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
 
-
 @command(pattern="^.unload (?P<shortname>\w+)$", outgoing=True)
 async def unload(event):
     if event.fwd_from:
@@ -72,12 +70,11 @@ async def unload(event):
     shortname = event.pattern_match["shortname"]
     try:
         remove_plugin(shortname)
-        await event.edit(f"**Unload {shortname} eseguito**")
+        await event.edit(f"**Unload** {shortname} **eseguito**")
     except Exception as e:
-        await event.edit("**Unload {shortname} eseguito\n{}**".format(shortname, str(e)))
-        await asyncio.sleep(DELETE_TIMEOUT)
-        await event.delete()
-
+        await event.edit("**Unload** {shortname} **eseguito**\n{}".format(shortname, str(e)))
+    await asyncio.sleep(DELETE_TIMEOUT)
+    await event.delete()
 
 @command(pattern="^.load (?P<shortname>\w+)$", outgoing=True)
 async def load(event):
@@ -90,6 +87,6 @@ async def load(event):
         except:
             pass
         load_module(shortname)
-        await event.edit(f"**Caricato {shortname}**")
+        await event.edit(f"**Caricato** {shortname}")
     except Exception as e:
         await event.edit(f"**Impossibile caricare {shortname} causa error.\n{str(e)}**")
