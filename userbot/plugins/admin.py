@@ -154,7 +154,7 @@ async def get_user_from_id(user, event):
 
     return user_obj
 
-
+"""
 @register(outgoing=True, pattern=".gmute ?(.*)")
 @errors_handler
 async def gspider(gspdr):
@@ -198,7 +198,7 @@ async def gspider(gspdr):
                 BOTLOG_CHATID, "#GMUTE\n"
                 f"USER: [{user.first_name}](tg://user?id={user.id})\n"
                 f"CHAT: {gspdr.chat.title}(`{gspdr.chat_id}`)")
-
+"""
 
 @bot.on(dev_cmd(pattern="kick ?(.*)", outgoing=True))
 @errors_handler
