@@ -127,6 +127,16 @@ async def _(event):
             await asyncio.sleep(animation_interval)
             await event.edit(animation_chars[i % 117])
 
+@bot.on(dev_cmd("oh ?(.*)", outgoing=True))
+async def lol(e):
+    await e.edit(
+"\n██╗░░░░░░█████╗░██╗░░░░░"
+"\n██║░░░░░██╔══██╗██║░░░░░"
+"\n██║░░░░░██║░░██║██║░░░░░"
+"\n██║░░░░░██║░░██║██║░░░░░"
+"\n███████╗╚█████╔╝███████╗"
+"\n╚══════╝░╚════╝░╚══════╝") 
+ 
 @bot.on(dev_cmd(pattern=f"ok", outgoing=True))
 async def _(event):
     if event.fwd_from:
