@@ -154,51 +154,6 @@ async def get_user_from_id(user, event):
 
     return user_obj
 
-"""
-@register(outgoing=True, pattern=".gmute ?(.*)")
-@errors_handler
-async def gspider(gspdr):
-    """ For .gmute command, globally mutes the replied/tagged person """
-    # Admin or creator check
-    chat = await gspdr.get_chat()
-    admin = chat.admin_rights
-    creator = chat.creator
-
-    # If not admin and not creator, return
-    if not admin and not creator:
-        await gspdr.edit(NO_ADMIN)
-        return
-
-    # Check if the function running under SQL mode
-    try:
-        from userbot.plugins.sql_helper.gmute_sql import gmute
-    except AttributeError:
-        await gspdr.edit(NO_SQL)
-        return
-
-    user, reason = await get_user_from_event(gspdr)
-    if user:
-        pass
-    else:
-        return
-
-    # If pass, inform and start gmuting
-    await gspdr.edit("`Grabs a huge, sticky duct tape!`")
-    if gmute(user.id) is False:
-        await gspdr.edit(
-            '`Error! User probably already gmuted.\nRe-rolls the tape.`')
-    else:
-        if reason:
-            await gspdr.edit(f"`Globally taped!`Reason: {reason}")
-        else:
-            await gspdr.edit("`Globally taped!`")
-
-        if BOTLOG:
-            await gspdr.client.send_message(
-                BOTLOG_CHATID, "#GMUTE\n"
-                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                f"CHAT: {gspdr.chat.title}(`{gspdr.chat_id}`)")
-"""
 
 @bot.on(dev_cmd(pattern="kick ?(.*)", outgoing=True))
 @errors_handler
