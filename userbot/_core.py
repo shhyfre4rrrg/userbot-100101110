@@ -75,6 +75,8 @@ async def unload(event):
         await event.edit(f"**Unload {shortname} eseguito**")
     except Exception as e:
         await event.edit("**Unload {shortname} eseguito\n{}**".format(shortname, str(e)))
+        await asyncio.sleep(DELETE_TIMEOUT)
+        await event.delete()
 
 
 @command(pattern="^.load (?P<shortname>\w+)$", outgoing=True)
