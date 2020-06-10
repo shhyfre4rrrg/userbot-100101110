@@ -1,11 +1,13 @@
-"""Heroku manager for your userbot"""
+"""Heroku manager for userbot"""
 
 import heroku3
 import asyncio
 import os
 import requests
 import math
+import json
 from userbot import bot
+from userbot.prettyjson import prettyjson
 from userbot.system import register, dev_cmd, command
 
 
@@ -152,11 +154,3 @@ async def dyno_usage(dyno):
 async def info(event):
     await bot.send_message(event.chat_id, "**Info Modulo Heroku:**\n\n`.usage`\nUso:__Mostra le ore del dyno heroku.__\n\n`.set var <NEW VAR> <VALUE>`\nUso: __Aggiunge una Var o l'aggiorna__\n**!!! WARNING !!! Dopo averla impostata il bot si riavvia.**\n\n`.get var o .get var <VAR>`\nUso: __Modifica le Var esistenti,da usare in privato!__\n**Ciò mostra informazioni private, siate cauti...**\n\n`.del var <VAR>`\nUso: __Elimina Var esistente__\n**!!! WARNING !!! Dopo averla impostata il bot si riavvia**")
     await event.delete()
-
-
-def prettyjson(obj, indent=2, maxlinelength=80):
-    """Renders JSON content with indentation and line splits/concatenations to fit maxlinelength.
-    Only dicts, lists and basic types are supported"""
-
-    items, _ = getsubitems(obj, itemkey="", islast=True, maxlinelength=maxlinelength - indent, indent=indent)
-    return indentitems(items, indent, level=0)
