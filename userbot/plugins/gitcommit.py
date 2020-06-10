@@ -10,6 +10,7 @@ import time
 from datetime import datetime
 from telethon import events
 from telethon.tl.types import DocumentAttributeVideo
+from userbot import bot
 from userbot.system import command
 
 GIT_TEMP_DIR = "./userbot/temp/"
