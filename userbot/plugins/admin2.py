@@ -214,4 +214,4 @@ async def _(event):
             msgs = []
             await event.delete()
         else:
-            await event.edit("**PURGE** Failed!")
+            await event.reply("**PURGE** Failed!")
