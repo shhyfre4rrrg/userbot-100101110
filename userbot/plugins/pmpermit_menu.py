@@ -26,7 +26,6 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "100101110"
 PREV_REPLY_MESSAGE = {}
 # ============================================
 
-
 @command(pattern=r"\/start", incoming=True)
 async def _(event):
     chat_id = event.from_id
@@ -36,65 +35,64 @@ async def _(event):
         if event.fwd_from:
             return
         if event.is_private:
-         PM = ("Questo è il menù avviabile di"
-               f"{DEFAULTUSER}.\n"
-               "Indica il motivo perchè sei qui\n"
-               "**Scegli tra uno di questi motivi:**\n\n"
-               "`1`. Per chattare con me\n"
-               "`2`. Per spammare in chat.\n"
-               "`3`. Per domandare qualcosa\n")
-         ONE = ("La tua richiesta è stata registrata, non spammare in chat avrai una risposta entro 24H. Sono impegnato, a differenza tua probabilmente.\n\n"
-                "**⚠️ Verrai bloccato dal bot se continui a spammare ti avviso ⚠️**\n\n"
-                "Premi `/start` per tornare al menù principale")
-         TWO = (" `███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ `\n\n**Ti avevo avvisato,sei stato bloccato dal bot.**")  
-         THREE = ("Chiedi pure scrivi tutto in un messaggio non ci sono ti risponderò al più presto.\n**Non spammare se non vuoi essere bloccato dal bot.**")
-         LWARN = ("**⚠️ Ultimo avviso ⚠️ non inviare altri messeggi altrimenti verrai bloccato dal bot attendi ti risponderò al più presto.**\nPremi `/start` per tornare al menù principale.")
+            PM = (f"**Questo è il menù di** {DEFAULTUSER}\n"
+                   "**Indica il motivo perchè sei qui.**\n"
+                   "**Scegli tra uno di questi:**\n\n"
+                   "`1`. **Chattare con me.**\n"
+                   "`2`. **Spammare in chat.**\n"
+                   "`3`. **Chiedere qualcosa.**\n")
+            ONE = ("**La tua richiesta è stata registrata, non spammare avrai una risposta presto sono impegnato.**\n\n"
+                   "**⚠️ Ti avviso che verrai bloccato dal bot se spammi. ⚠️**\n\n"
+                   "**Premi** `/start` **per tornare al menù principale**")
+            TWO = ("**Ti avevo avvisato,sei stato bloccato dal bot.**")  
+            THREE = ("**Chiedi pure scrivi tutto in un messaggio, non ci sono ti risponderò al più presto.\n**Non spammare se non vuoi essere bloccato dal bot.**")
+            LWARN = ("**⚠️ Ultimo avviso ⚠️**\n**Non inviare altri messeggi altrimenti verrai bloccato dal bot, attendi ti risponderò al più presto.**\n**Premi** `/start` **per tornare al menù principale.**")
      
     async with bot.conversation(chat) as conv:
-         await bot.send_message(chat, PM)
-         chat_id = event.from_id
-         response = await conv.get_response(chat)
-         y = response.text
-         if y == "1":
-             await bot.send_message(chat, ONE)
-             response = await conv.get_response(chat)
-             await event.delete()
-             if not response.text == "/start":
-                 await response.delete()
-                 await bot.send_message(chat, LWARN)
-                 response = await conv.get_response(chat)
-                 await event.delete()
-                 await response.delete()
-                 response = await conv.get_response(chat)
-                 if not response.text == "/start":
-                     await bot.send_message(chat, TWO)
-                     await asyncio.sleep(3)
-                     await event.client(functions.contacts.BlockRequest(chat_id))
-         elif y == "2":
-             await bot.send_message(chat, LWARN)
-             response = await conv.get_response(chat)
-             if not response.text == "/start":
-                 await bot.send_message(chat, TWO)
-                 await asyncio.sleep(3)
-                 await event.client(functions.contacts.BlockRequest(chat_id))
-         elif y == "3":
-             await bot.send_message(chat,THREE)
-             response = await conv.get_response(chat)
-             if not response.text == "/start":
-                 await bot.send_message(chat, LWARN)
-                 response = await conv.get_response(chat)
-                 if not response.text == "/start":
-                     await bot.send_message(chat, TWO)
-                     await asyncio.sleep(3)
-                     await event.client(functions.contacts.BlockRequest(chat_id))
-         else:
-             await bot.send_message(chat, "Comando non valido. Premi `/start` non inviare altri messaggi se non vuoi essere bloccato dal bot.")
-             response = await conv.get_response(chat)
-             z = response.text
-             if not z == "/start":
-                 await bot.send_message(chat, LWARN)
-                 await conv.get_response(chat)
-                 if not response.text == "/start":
-                     await bot.send_message(chat, TWO)
-                     await asyncio.sleep(3)
-                     await event.client(functions.contacts.BlockRequest(chat_id))
+        await bot.send_message(chat, PM)
+        chat_id = event.from_id
+        response = await conv.get_response(chat)
+        y = response.text
+        if y == "1":
+            await bot.send_message(chat, ONE)
+            response = await conv.get_response(chat)
+            await event.delete()
+            if not response.text == "/start":
+                await response.delete()
+                await bot.send_message(chat, LWARN)
+                response = await conv.get_response(chat)
+                await event.delete()
+                await response.delete()
+                response = await conv.get_response(chat)
+                if not response.text == "/start":
+                    await bot.send_message(chat, TWO)
+                    await asyncio.sleep(3)
+                    await event.client(functions.contacts.BlockRequest(chat_id))
+        elif y == "2":
+            await bot.send_message(chat, LWARN)
+            response = await conv.get_response(chat)
+            if not response.text == "/start":
+                await bot.send_message(chat, TWO)
+                await asyncio.sleep(3)
+                await event.client(functions.contacts.BlockRequest(chat_id))
+        elif y == "3":
+            await bot.send_message(chat,THREE)
+            response = await conv.get_response(chat)
+            if not response.text == "/start":
+                await bot.send_message(chat, LWARN)
+                response = await conv.get_response(chat)
+                if not response.text == "/start":
+                    await bot.send_message(chat, TWO)
+                    await asyncio.sleep(3)
+                    await event.client(functions.contacts.BlockRequest(chat_id))
+        else:
+            await bot.send_message(chat, "Comando non valido. Premi `/start` non inviare altri messaggi se non vuoi essere bloccato dal bot.")
+            response = await conv.get_response(chat)
+            z = response.text
+            if not z == "/start":
+                await bot.send_message(chat, LWARN)
+                await conv.get_response(chat)
+                if not response.text == "/start":
+                    await bot.send_message(chat, TWO)
+                    await asyncio.sleep(3)
+                    await event.client(functions.contacts.BlockRequest(chat_id))
