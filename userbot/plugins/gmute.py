@@ -1,6 +1,7 @@
-from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 import asyncio
 from heroku_config import Var
+from telethon.tl.functions.users import GetFullUserRequest
+from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 from userbot.system import command
 from userbot import ALIVE_NAME
 
@@ -27,7 +28,7 @@ async def startgmute(event):
     else:
         return await event.edit(f"`{DEFAULTUSER}:`**Rispondi ad un user per gmute.**")
     chat_id = event.chat_id
-    chat = await event.get_chat()
+    replied_user = await event.client(GetFullUserRequest(userid))
     if is_muted(userid, "gmute"):
         return await event.edit(f"`{DEFAULTUSER}:`**User già gmutato ⚠️**")
     try:
@@ -61,6 +62,7 @@ async def endgmute(event):
     else:
         return await event.edit(f"`{DEFAULTUSER}:`**Rispondi ad un user per ungmute.**")
     chat_id = event.chat_id
+    replied_user = await event.client(GetFullUserRequest(userid))
     if not is_muted(userid, "gmute"):
         return await event.edit(f"`{DEFAULTUSER}:`**User non gmutato ⚠️**")
     try:
