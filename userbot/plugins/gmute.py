@@ -1,10 +1,12 @@
 from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 import asyncio
+from heroku_config import Var
 from userbot.system import command
 from userbot import ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "100101110"
-
+BOTLOG = True
+BOTLOG_CHATID = Var.PRIVATE_GROUP_ID
 
 @command(outgoing=True, pattern=r"^.gmute ?(\d+)?")
 async def startgmute(event):
@@ -33,8 +35,12 @@ async def startgmute(event):
     except Exception as e:
         await event.edit("Error occured!\nError is " + str(e))
     else:
-        await event.edit(f"`{DEFAULTUSER}:`**bro gmute eseguito.**")
-
+        await event.edit(f"`{DEFAULTUSER}:`**gmute eseguito.**")
+    if BOTLOG:
+      await event.client.send_message(
+                    BOTLOG_CHATID, "#GMUTE\n"
+                    f"USER: [{replied_user.user.first_name}](tg://user?id={userid})\n"
+                    f"CHAT: {event.chat.title}(`{event.chat_id}`)")
 
 @command(outgoing=True, pattern=r"^.ungmute ?(\d+)?")
 async def endgmute(event):
@@ -62,7 +68,12 @@ async def endgmute(event):
     except Exception as e:
         await event.edit("Error occured!\nError is " + str(e))
     else:
-        await event.edit(f"`{DEFAULTUSER}:`**bro ungmute eseguito.**")
+        await event.edit(f"`{DEFAULTUSER}:`**ungmute eseguito.**")
+    if BOTLOG:
+      await event.client.send_message(
+                    BOTLOG_CHATID, "#UNGMUTE\n"
+                    f"USER: [{replied_user.user.first_name}](tg://user?id={userid})\n"
+                    f"CHAT: {event.chat.title}(`{event.chat_id}`)")          
 
 @command(incoming=True)
 async def watcher(event):
