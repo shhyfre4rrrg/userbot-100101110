@@ -35,20 +35,18 @@
     },
     "HEROKU_API_KEY": {
       "description": "Vai su https://dashboard.heroku.com/account, vai su API KEY premi Reveal e copiala.",
-      "value": "",
-      "required": false
+      "value": ""
     },
     "HEROKU_APP_NAME": {
-      "description": "Valore uguale ad App Name inserito all'inizio.",
-      "value": "",
-      "required": false
+      "description": "Copia qui <App Name> inserito all'inizio.",
+      "value": ""
     },
     "PRIVATE_GROUP_ID": {
       "description": "Crea un gruppo privato e inserisci il ChatId per il log (es:-10012345678).",
       "value": ""
     },
     "MAX_FLOOD_IN_P_M_s": {
-      "description": "Massimo numero di messaggi che una persona può inviarti prima di essere bloccata. Valore di default è 3.",
+      "description": "Numero di messaggi che una persona può inviarti prima di essere bloccata in pv. Valore di default 3.",
       "value": "3",
       "required": false
     },
@@ -114,7 +112,7 @@
   "addons": [{
     "plan": "heroku-postgresql",
     "options": {
-      "version": "12"
+      "version": "9.6"
     }
   }],
   "buildpacks": [{
