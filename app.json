@@ -1,3 +1,4 @@
+  
 {
   "name": "userbot-100101110",
   "logo": "https://www.toptenz.net/wp-content/uploads/2019/01/red-dragon-3235672_640.jpg",
@@ -114,7 +115,7 @@
   "addons": [{
     "plan": "heroku-postgresql",
     "options": {
-      "version": "9.5"
+      "version": "12"
     }
   }],
   "buildpacks": [{
